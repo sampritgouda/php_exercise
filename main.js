@@ -5,8 +5,6 @@ $(document).ready(function(){
     $('#post-form').on('submit', function(e) {
         e.preventDefault(); 
 
-        console.log('Form submitted'); // test
-
         var postContent = $('#post-content').val().trim();
         if(postContent === '') return; // ignore empty
 
@@ -17,19 +15,33 @@ $(document).ready(function(){
             data: { post_content: postContent },
             success: function(response) {
                 if(response.status === "success"){
-                    $('#message').text(response.message)
-                                 .removeClass("text-danger")
-                                 .addClass("text-success");
+                    $('#form-message')
+                        .stop(true, true)
+                        .hide()
+                        .html(`<div class="alert alert-success">${response.message}</div>`)
+                        .fadeIn(300)
+                        .delay(2000)
+                        .fadeOut(500);
                     $('#post-content').val(''); // clear textarea
                     fetch_posts(); // refresh post feed
                 } else {
-                    $('#message').text(response.message)
-                                 .removeClass("text-success")
-                                 .addClass("text-danger");
+                    $('#form-message')
+                        .stop(true, true)
+                        .hide()
+                        .html(`<div class="alert alert-success">${response.message}</div>`)
+                        .fadeIn(300)
+                        .delay(2000)
+                        .fadeOut(500);
                 }
             },
             error: function() {
-                alert('Error posting. Please try again.');
+                 $('#form-message')
+                        .stop(true, true)
+                        .hide()
+                        .html(`<div class="alert alert-success">Error posting please try again</div>`)
+                        .fadeIn(300)
+                        .delay(2000)
+                        .fadeOut(500);
             }
         });
     });
@@ -84,6 +96,7 @@ $(document).ready(function(){
     // Handle profile update
     $('#profile-form').on('submit', function(e){
         e.preventDefault();
+       
         $.ajax({
             url: 'update_user.php',
             type: 'POST',
@@ -91,9 +104,22 @@ $(document).ready(function(){
             dataType: 'json',
             success: function(res){
                 if(res.status === 'success'){
-                    $('#form-message').html('<p class="text-success">'+res.message+'</p>');
+                      $('#form-message')
+                        .stop(true, true)
+                        .hide()
+                        .html(`<div class="alert alert-success">${res.message}</div>`)
+                        .fadeIn(300)
+                        .delay(2000)
+                        .fadeOut(500);
+                        fetch_posts();
                 } else {
-                    $('#form-message').html('<p class="text-danger">'+res.message+'</p>');
+                    $('#form-message')
+                        .stop(true, true)
+                        .hide()
+                        .html(`<div class="alert alert-danger">${res.message}</div>`)
+                        .fadeIn(300)
+                        .delay(2000)
+                        .fadeOut(500);
                 }
             },
             error: function(){
@@ -111,7 +137,7 @@ $(document).ready(function(){
             url: 'logout.php',
             type: 'POST',
             success: function(){
-                window.location.href = 'login.php';
+                window.location.href = 'index.php';
             },
             error: function(){
                 alert('Error logging out.');
@@ -128,8 +154,16 @@ $(document).ready(function(){
             friendList.empty(); // clear existing content
 
             if (response.status === 'success' && response.friends.length > 0) {
+                $('#friends-count').text(response.total_friends+' Friends')
                 response.friends.forEach(friend => {
-                    friendList.append(`<h6 class="mb-2">${friend.Name}</h6>`);
+                    friendList.append(`
+                        <div class="d-inline-block text-center me-3">
+                            <img src="${friend.Image || 'img/default-user.png'}" 
+                                alt="${friend.Name}" 
+                                class="rounded-circle mb-2 friend-images-content" >
+                            <h6 class="mb-0">${friend.Name}</h6>
+                        </div>
+                    `);
                 });
             } else {
                 friendList.html('<p class="text-muted">No friends found.</p>');

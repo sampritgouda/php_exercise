@@ -4,11 +4,13 @@ error_reporting(E_ALL);
 session_start();
 include "db_connection.php";
 
+//checking is loged in
 if(!isset($_SESSION['user_id'])){
     echo "<div>Please log in to view posts.</div>";
     exit();
 }
 
+//fetching posts
 $sql = "SELECT tw.post, tw.posting_date, tu.Name
         FROM tWall tw 
         JOIN tUser tu ON tw.user_id = tu.User_id
@@ -46,7 +48,7 @@ if($result->num_rows > 0){
         echo '    </span>';
         echo '  </div>';
         echo '  <div class="post-text">';
-        echo '    <p>'.htmlspecialchars($row['post']).'</p>';
+        echo '    <p class="post-card-text">'.htmlspecialchars($row['post']).'</p>';
         echo '  </div>';
         echo '  <div class="d-flex justify-content-between post-action-count">';
         echo '    <div class="d-flex">';
@@ -61,13 +63,13 @@ if($result->num_rows > 0){
         echo '  </div>';
         echo '  <hr class="mb-0">';
         echo '  <div class="row post-action-btn">';
-        echo '    <div class="col-4 px-0 px-lg-2">';
+        echo '    <div class="col-3 col-sm-4 px-0 px-lg-2">';
         echo '      <button class="btn w-100 "><i class="fa-regular fa-thumbs-up"></i> Like</button>';
         echo '    </div>';
-        echo '    <div class="col-4 px-0 px-lg-2">';
+        echo '    <div class="col-sm-4 col-5 px-0 px-lg-2">';
         echo '      <button class="btn w-100 "><i class="fa-regular fa-comment"></i> Comments</button>';
         echo '    </div>';
-        echo '    <div class="col-4 px-0 px-lg-2">';
+        echo '    <div class="col-sm-4 col-3 px-0 px-lg-2">';
         echo '      <button class="btn w-100 "><i class="fa-solid fa-share"></i> Share</button>';
         echo '    </div>';
         echo '  </div>';

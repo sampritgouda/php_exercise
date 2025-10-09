@@ -8,14 +8,34 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $mobile_number = $_POST['phone-number'];
     $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
-    $stmt = $conn->prepare("INSERT INTO tUser (Name, Email_id, Password, Address, Phone) VALUES (?, ?, ? ,? , ?)");
-    $stmt->bind_param("sssss", $username, $email, $password ,$address, $mobile_number);
-    
-    if ($stmt->execute()) {
-        echo "Registration successful! <a href='login.php'>Login here</a>";
-    } else {
-        echo "Error: " . $stmt->error;
-    }
+
+    $checkStmt = $conn->prepare("SELECT * FROM tUser WHERE Email_id = ?");
+    $checkStmt->bind_param("s", $email);
+    $checkStmt->execute();
+    $result = $checkStmt->get_result();
+
+    if ($result->num_rows > 0) {
+        // Email already exists
+        echo "<div class='alert alert-danger text-center position-fixed top-0 w-100' style='z-index:1050;'>
+                Email already registered!
+              </div>";
+    } 
+    else{
+
+            $stmt = $conn->prepare("INSERT INTO tUser (Name, Email_id, Password, Address, Phone) VALUES (?, ?, ? ,? , ?)");
+            $stmt->bind_param("sssss", $username, $email, $password ,$address, $mobile_number);
+            
+            if ($stmt->execute()) {
+                echo "<div class='alert alert-success text-center  position-fixed top-0 w-100'>Registration successful!.</div>
+                    <script>
+                            setTimeout(function() {
+                                window.location.href = 'index.php';
+                            }, 2000); 
+                        </script>";
+            } else {
+                echo "<div class='alert alert-danger text-center position-fixed top-0 w-100'>Please Enter Valid Information</div>";
+            }
+        }
 }
 ?>
 
@@ -31,9 +51,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 </head>
 <body class="bg-light">
 
-<div class="container mt-5">
-    <div class="row justify-content-center">
-        <div class="col-md-6">
+<div class="container">
+    <div class="row justify-content-center min-vh-100">
+        <div class="col-md-6 my-auto">
 
             <div class="card shadow-sm p-4">
                 <h2 class="mb-4 text-center">Register</h2>
@@ -62,7 +82,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
                     <button type="submit" class="btn btn-primary w-100">Register</button>
                 </form>
-
+                <div class="text-center mt-3">Already have account ?<a class="ms-2" href="login.php">login</a></div>
             </div>
         </div>
     </div>

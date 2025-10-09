@@ -1,7 +1,9 @@
 <?php
 session_start();
 header('Content-Type: application/json');
-require_once "db_connection.php"; // your DB connection file
+
+//DB connection file
+require_once "db_connection.php";  
 
 // Check if user is logged in
 if(!isset($_SESSION['user_id'])){

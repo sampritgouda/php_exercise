@@ -35,7 +35,8 @@ while ($row = $result->fetch_assoc()) {
 if (!empty($friends)) {
     echo json_encode([
         'status' => 'success',
-        'friends' => $friends
+        'friends' => $friends,
+        'total_friends' => count($friends)
     ]);
 } else {
     echo json_encode([

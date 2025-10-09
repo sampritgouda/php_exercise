@@ -1,9 +1,26 @@
 body{
     font-family: Arial, Helvetica, sans-serif;
 }
+
+/*********************************************************
+                    Popup Message
+**********************************************************/
+.message-popup{
+    position: fixed;
+    top:5%;
+    left: 50%;
+    transform: translate(-50%);
+    z-index: 99999;
+}
+
+
+/*********************************************************
+                          Topbar
+**********************************************************/
 .topbar{
     background-color: #ffffff;
     z-index: 9999;
+    min-height: 56px;
 }
 .topbar-svg-container{
     cursor: pointer;
@@ -28,10 +45,8 @@ body{
 .topbar-nav-container{
     gap: 8px;
 }
-.top-bar{
-    height: 56px;
-}
 
+/* search bar */
 .search-bar-input{
     outline: none;
     border: none;
@@ -47,10 +62,12 @@ body{
     height: 80%;
     align-items: center;
     padding: 0 15px;
-    width: 285px;
+    width: 280px;
     gap: 5px;
+    margin-left: 4px;
 }
 
+/* notification icon */
 .notification-numbers{
     position: absolute;
     width: 19px;
@@ -83,10 +100,14 @@ body{
     margin-right: -8px;
 }
 .topbar-nav{
-    padding-left: 128px;
+    padding-left: 150px;
     padding-bottom: 3px;
     padding-top: 3px;
 }
+
+/*********************************************************
+                    Profile Banner
+**********************************************************/
 .banner-image{
     margin-top: -210px;
     z-index: 99;
@@ -138,6 +159,11 @@ body{
     pointer-events: none;
     z-index: 2;
 }
+
+
+/*********************************************************
+                        Profile Summary
+**********************************************************/
 .username{
     font-weight: 700;
     font-size: 32px;
@@ -166,8 +192,15 @@ body{
     background-color: #E2E5E9;
 }
 
-
-
+.profile-summary-image-dot{
+    z-index: 9;
+    top: 15%;
+    left: 25%;
+    filter: invert(1) brightness(2);
+}
+.profile-summary-end-image {
+    filter:  brightness(60%);
+}
 .follow-buttton,
 .profile-summary-dropdown,
 .profile-summary-search{
@@ -203,7 +236,7 @@ body{
 .profile-nav-tabs.active {
   color: #0064d1;
   border-radius: 0;
-  position: relative; /* needed for pseudo-element */
+  position: relative; 
 }
 
 .profile-nav-tabs.active::after {
@@ -212,8 +245,8 @@ body{
   left: 0;
   right: 0;
   bottom: -5px;
-  height: 3px;              /* thickness of underline */
-  background-color: #0064d1; /* same as border color */
+  height: 3px;              
+  background-color: #0064d1; 
 }
 
 .profile-nav-tabs:hover{
@@ -230,15 +263,36 @@ body{
     align-items: center;
     border-radius: 8px;
 }
+.profile-summary-start-image { 
+    z-index: 8; 
+    border: 3px solid #ffffff;
+}
+.friends-images:nth-child(2) { z-index: 7; }
+.friends-images:nth-child(3) { z-index: 6; }
+.friends-images:nth-child(4) { z-index: 5; }
+.friends-images:nth-child(5) { z-index: 4; }
+.friends-images:nth-child(6) { z-index: 3; }
+.friends-images:nth-child(7) { z-index: 2; }
+/*********************************************************
+                        Profile post section
+**********************************************************/
 
 .profile-post-content{
     background-color: #F2F4F7;
 }
 
+.friend-images-content{
+   width: 100px;
+   
+}
+.friend-container-heading{
+    font-weight: 700;
+}
 .profile-details-card,
 .post-heading-card,
 .post-form-container,
-.post-card{
+.post-card,
+.friend-list-container{
     background-color: #ffffff;
     border-radius: 15px;
     font-size: 15px;
@@ -252,7 +306,7 @@ body{
    width: 20px;
 }
 .profile-details-card{
-    max-height: 450px;
+    max-height: 470px;
 }
 .filter-button{
     background-color: #E2E5E9;
@@ -280,10 +334,9 @@ body{
   right: 0;
   background: #fff;
   border-radius: 10px;
-  padding: 10px 15px;
   width: 300px;
   display: none;
-  z-index: 100;
+  z-index: 9999;
   box-shadow: 0 4px 10px rgba(0,0,0,0.15);
 }
 
@@ -308,16 +361,159 @@ body{
     font-size: 15px;
     font-weight: bold;
 }
+.cursor-pointer{
+    cursor: pointer;
+}
 
-.modal-content{
-    width: 100%;
+.post-card-text{
+    font-size: 23px;
+    word-wrap: break-word;
+}
+
+/*********************************************************
+                        Profile Edit Modal
+**********************************************************/
+
+.profile-popup-header:hover{
+    background-color: #E2E5E9;
+}
+.modal-dialog{
+    max-width: 35% !important;
 }
 .popup-profile-name{
     font-weight: 600;
     font-size: 20px;
 }
+.modal{
+  background-color: rgba(255, 255, 255, 0.85);
+   z-index: 9999;
+}
+.modal-title{
+    font-size: 20px;
+    font-weight: 700;
+}
 
-@media  (max-width:992px) {
+.modal .btn-close{
+    background-color: #E2E5E9;
+    border-radius: 50%;
+    width: 20px;
+    height:20px;
+}
+.modal-dialog .form-label{
+    font-weight: 800;
+    font-size: 17px;
+}
+
+.modal-content{
+    height: 80vh;
+    box-shadow: 0 12px 28px 0  rgba(0, 0, 0, .2) ,0 2px 4px 0 rgba(0, 0, 0, .1),inset 0 0 0 1px rgba(255, 255, 255, .5);
+}
+
+.modal .form-control{
+    border: none;
+    border-bottom: 1px solid rgba(0, 0, 0, .1);
+    border-radius: 0;
+    color: #0064D1;
+}
+.modal .form-control:focus{
+    outline: none;
+    box-shadow: none;
+    color: #0064D1;
+}
+
+.modal-cancel-btn{
+    background-color: #E2E5E9;
+    color: black;
+    font-weight: 700;
+}
+
+#friends-count{
+    opacity: 0.8;
+    font-weight: 300;
+}
+
+/*********************************************************
+                        Mobile Screeen
+**********************************************************/
+@media  (max-width:325px) {
+
+    .about-btn{
+        display: none !important;
+    }
+    .follow-buttton,
+    .profile-summary-search{
+        width: 100px;
+        display: flex;
+        justify-content: center;
+    }
+    .profile-summary-dropdown{
+        width: 60px;
+    }
+    .profile-banner{
+        height: 118px;
+    }
+    .banner-image{
+        margin-top:-52px ;
+    }
+    .top-bar-profile-container{
+        width: 71% !important;
+        margin-left: 40px;
+    }
+    .profile-summary .username{
+        width: 80%;
+        margin-left: 10%;
+        line-height: 1;
+    }
+    .profile-summary .followers-count{
+        margin-top: 6px;
+    }
+    .post-action-btn .btn{
+        padding: 0 !important;
+    }
+    .post-action-count{
+        font-size: 13px;
+    }
+}
+
+@media (min-width:326px) and (max-width:425px) {
+    .message-popup{
+        width: 70%;
+    }
+    .profile-banner{
+        height: 157px;
+    }
+    .follow-buttton,
+    .profile-summary-search{
+        width: 40%;
+        display: flex;
+        justify-content: center;
+    }
+    .profile-summary-dropdown{
+        width: 94px;
+    }
+    .banner-image{
+        margin-top: -62px;
+    }
+    
+    .summary-actions{
+        width: 100%;
+    }
+    .post-action-btn .btn{
+        padding: 0 !important;
+    }
+    @media  (max-width:375px) {
+        .profile-banner{
+            height: 140px;
+        }
+    }
+
+}
+
+
+/*********************************************************
+                        Tab screen
+**********************************************************/
+@media (max-width:992px) {
     .profile-banner{
         max-height: 285px;
     }
@@ -326,9 +522,34 @@ body{
     }
     .topbar-nav{
         padding-left: 100px;
-        margin-left: 60px;
+        margin-left: 45px;
+    }
+    .modal-dialog{
+        max-width: 96% !important;
+    }
+    #profile-popup{
+        width: 200px;
+    }
+    .search-bar-container{
+        width: 40px;
+        height: 40px;
+        padding-left: 12px;
+    }
+    .horizontal-line{
+        margin-top: 10px;
+    }
+    @media (min-width:426px) {
+
+        .banner-image{
+            margin-top: -129px;
+        }
     }
 }
+
+
+/*********************************************************
+                        Laptop Screen
+**********************************************************/
 @media (min-width:993px) and (max-width:1439px) {
     .profile-banner{
         max-height: 380px;
@@ -340,18 +561,51 @@ body{
     .profile-summary{
         margin-top: -30px;
     }
+    .search-bar-container{
+        width: 40px;
+        height: 40px;
+        padding-left: 12px;
+    }
+    .banner-image{
+        margin-top: -170px;
+    }
+    .post-footer-container{
+        padding: 0 30px !important;
+    }
     
 }
-@media (min-width:993px) and (max-width:1800px) {
-    .summary-detail-container{
-        padding-left: 50px;
+
+
+@media (min-width:1025px) and (max-width:1440px) {
+    
+    .profile-banner-container{
+        padding: 0 20px;
+    }
+    .topbar-nav{
+        padding-left: 10px;
+    }
+    .profile-page-footer-container{
+        padding: 0 25px;
     }
 }
+
+/*********************************************************
+                        Desktop Screen
+**********************************************************/
+
 @media (min-width:1440) and (max-width:1800) {
     .summary-detail-container{
-        padding-left: 40px !important;
+        padding-left: 0px !important;
+    }
+    .profile-banner-container{
+        margin-left: 5% !important;
+        margin-right: 5% !important;
+    }
+    .profile-page-footer-container{
+        padding: 0 25px;
     }
 }
+
 
 @media (min-width:1240px){
 
@@ -385,3 +639,24 @@ body{
     }
 }
 
+
+@media (min-width:1800px){
+    .responsive-xxl{
+        max-width: 1250px !important;
+    }
+    .responsive-xxl-footer{
+        max-width: 1270px !important;
+    }
+    .topbar-nav{
+        padding-left: 128px;
+    }
+    .profile-banner-container{
+        padding: 0;
+    }
+}
+
+@media (min-width:2100px){
+    .topbar-nav{
+        padding-left: 9%;
+    }
+}
