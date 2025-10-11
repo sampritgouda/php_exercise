@@ -8,7 +8,7 @@ if (!isset($_SESSION['user_id'])) {
     exit;
 }
 
-$user_id = $_SESSION['user_id'];
+$user_id = isset($_GET['user_id']) ? intval($_GET['user_id']) : $_SESSION['user_id'] ?? null;
 
 
 $sql = "

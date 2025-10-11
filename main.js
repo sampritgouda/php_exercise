@@ -1,5 +1,8 @@
 $(document).ready(function(){
+    const urlParams = new URLSearchParams(window.location.search);
+    const userId = urlParams.get('user_id');
     fetch_posts();
+    fetch_name();
 
     // Form submit handler
     $('#post-form').on('submit', function(e) {
@@ -15,33 +18,15 @@ $(document).ready(function(){
             data: { post_content: postContent },
             success: function(response) {
                 if(response.status === "success"){
-                    $('#form-message')
-                        .stop(true, true)
-                        .hide()
-                        .html(`<div class="alert alert-success">${response.message}</div>`)
-                        .fadeIn(300)
-                        .delay(2000)
-                        .fadeOut(500);
+                    showMessage('success', response.message);
                     $('#post-content').val(''); // clear textarea
                     fetch_posts(); // refresh post feed
                 } else {
-                    $('#form-message')
-                        .stop(true, true)
-                        .hide()
-                        .html(`<div class="alert alert-success">${response.message}</div>`)
-                        .fadeIn(300)
-                        .delay(2000)
-                        .fadeOut(500);
+                     showMessage('warning', response.message);
                 }
             },
             error: function() {
-                 $('#form-message')
-                        .stop(true, true)
-                        .hide()
-                        .html(`<div class="alert alert-success">Error posting please try again</div>`)
-                        .fadeIn(300)
-                        .delay(2000)
-                        .fadeOut(500);
+                showMessage('error', 'Error posting please try again');
             }
         });
     });
@@ -51,16 +36,33 @@ $(document).ready(function(){
         $.ajax({
             url: 'fetch_post.php',
             type: 'GET',
+            data: { user_id: userId },
             success: function(data){
                 $('#post-container').html(data);
             }
         });
     }
 
-    $('#profile-toggle').on('click',(e)=>{
-      e.stopPropagation();
-      $('#profile-popup').toggle();
-    })
+    //open profile popup
+    $('#profile-toggle').on('click', function(e) {
+    e.stopPropagation();
+
+    // Check if user is logged in
+    $.ajax({
+        url: 'check_session.php',
+        method: 'GET',
+        dataType: 'json',
+        success: function(response) {
+        if (!response.logged_in) {
+            $('#logout-btn').text('Login')
+        }
+    }
+        
+    });
+    $('#profile-popup').toggle();
+
+    });
+
 
     $(document).on('click',()=>{
       $('#profile-popup').hide();
@@ -84,11 +86,11 @@ $(document).ready(function(){
                     $('#profile-form [name="Address"]').val(data.Address);
                     $('#profile-form [name="Phone"]').val(data.Phone);
                 } else {
-                    $('#form-message').html('<p class="text-danger">'+res.message+'</p>');
+                    showMessage('warning', res.message);
                 }
             },
             error: function(){
-                $('#form-message').html('<p class="text-danger">Error loading profile.</p>');
+                showMessage('error', 'Error loading profile.');
             }
         });
     });
@@ -96,7 +98,7 @@ $(document).ready(function(){
     // Handle profile update
     $('#profile-form').on('submit', function(e){
         e.preventDefault();
-       
+       console.log($(this).serialize())
         $.ajax({
             url: 'update_user.php',
             type: 'POST',
@@ -104,33 +106,19 @@ $(document).ready(function(){
             dataType: 'json',
             success: function(res){
                 if(res.status === 'success'){
-                      $('#form-message')
-                        .stop(true, true)
-                        .hide()
-                        .html(`<div class="alert alert-success">${res.message}</div>`)
-                        .fadeIn(300)
-                        .delay(2000)
-                        .fadeOut(500);
-                        fetch_posts();
+                      showMessage('success', res.message);
+                      fetch_name();
                 } else {
-                    $('#form-message')
-                        .stop(true, true)
-                        .hide()
-                        .html(`<div class="alert alert-danger">${res.message}</div>`)
-                        .fadeIn(300)
-                        .delay(2000)
-                        .fadeOut(500);
+                    showMessage('warning', res.message);
                 }
             },
             error: function(){
-                $('#form-message').html('<p class="text-danger">Error updating profile.</p>');
+                showMessage('error', 'Error updating profile.');
             }
         });
     });
 
-    $('#cancel-btn').on('click',()=>{
-      profileModal.hide();
-    })
+
     // Logout
     $('#logout-btn').on('click', function(){
         $.ajax({
@@ -148,6 +136,7 @@ $(document).ready(function(){
   $.ajax({
         url: 'fetch_friend.php',   // your PHP file
         type: 'GET',
+        data: { user_id: userId },
         dataType: 'json',
         success: function(response) {
             const friendList = $('#friend-list');
@@ -157,12 +146,14 @@ $(document).ready(function(){
                 $('#friends-count').text(response.total_friends+' Friends')
                 response.friends.forEach(friend => {
                     friendList.append(`
-                        <div class="d-inline-block text-center me-3">
-                            <img src="${friend.Image || 'img/default-user.png'}" 
+                       <a href="dashboard.php?user_id=${friend.User_id}">
+                        <div class="d-flex align-items-center mb-3"> <div class="d-inline-block text-center me-3 mt-3">
+                            <img src="img/default-friend-image.jpg" 
                                 alt="${friend.Name}" 
-                                class="rounded-circle mb-2 friend-images-content" >
+                                class="rounded mb-2 friend-images-content" >
                             <h6 class="mb-0">${friend.Name}</h6>
                         </div>
+                       </a>
                     `);
                 });
             } else {
@@ -173,4 +164,63 @@ $(document).ready(function(){
             $('#friend-list').html('<p class="text-danger">Error loading friends.</p>');
         }
     });
+
+
+    function fetch_name(){
+            $.ajax({
+        url: 'fetch_name.php',
+        type: 'GET',
+        data: { user_id: userId },
+        dataType: 'json',
+        success: function(response) {
+            if (response.status === 'success') {
+                $('#profile-username').text(response.name);
+                response.is_self ? '' : $('#post-form-container').hide();
+            } else {
+                console.log("Error:", response.message);
+            }
+        },
+        error: function() {
+            console.log("Error fetching name");
+        }
+    });
+    }
+
+
+
+    //  Common message display function
+    function showMessage(type, message) {
+        const alertClass = type === 'success' ? 'alert-success' :
+                           type === 'error'   ? 'alert-danger'  :
+                           type === 'warning' ? 'alert-warning' : 'alert-info';
+        
+        $('#form-message')
+            .stop(true, true)
+            .hide()
+            .html(`<div class="alert ${alertClass} text-center position-fixed top-0 start-50 translate-middle-x mt-3 shadow">${message}</div>`)
+            .fadeIn(300)
+            .delay(2000)
+            .fadeOut(500);
+    }
+
+
+
+    $('#profileModal').on('click', '.edit-btn, .feild-cancel-btn', function() {
+    const input = $(this).closest('.field-section-container').find('input'); // find related input
+    const buttons = $(this).closest('.field-section-container').find('.field-save-btn'); 
+    const edit_btn = $(this).closest('.field-section-container').find('.edit-btn'); 
+    // Toggle input enable/disable
+    if (input.prop('disabled')) {
+        input.addClass('enabled');
+        buttons.removeClass('d-none');
+        input.prop('disabled', false).focus(); // enable and focus
+        edit_btn.text('Cancel');
+    } else {
+        input.removeClass('enabled');
+        buttons.addClass('d-none');
+        input.prop('disabled', true); // disable again
+        edit_btn.text('Edit');
+    }
+  });
+
 });

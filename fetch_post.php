@@ -10,13 +10,19 @@ if(!isset($_SESSION['user_id'])){
     exit();
 }
 
-//fetching posts
+$user_id = isset($_GET['user_id']) ? intval($_GET['user_id']) : $_SESSION['user_id'] ?? null;
+
+// Fetch posts for this user only
 $sql = "SELECT tw.post, tw.posting_date, tu.Name
-        FROM tWall tw 
+        FROM tWall tw
         JOIN tUser tu ON tw.user_id = tu.User_id
+        WHERE tw.user_id = ?
         ORDER BY tw.posting_date DESC";
 
-$result = $conn->query($sql);
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("i", $user_id);
+$stmt->execute();
+$result = $stmt->get_result();
 
 if($result->num_rows > 0){
     while($row = $result->fetch_assoc()){
@@ -64,13 +70,13 @@ if($result->num_rows > 0){
         echo '  <hr class="mb-0">';
         echo '  <div class="row post-action-btn">';
         echo '    <div class="col-3 col-sm-4 px-0 px-lg-2">';
-        echo '      <button class="btn w-100 "><i class="fa-regular fa-thumbs-up"></i> Like</button>';
+        echo '      <button class="btn w-100 "><img src="img/like.png" width="20px" height="20px"/> <span class="ms-1"> Like</span> </button>';
         echo '    </div>';
         echo '    <div class="col-sm-4 col-5 px-0 px-lg-2">';
-        echo '      <button class="btn w-100 "><i class="fa-regular fa-comment"></i> Comments</button>';
+        echo '      <button class="btn w-100 "><img src="img/chat.png" width="20px" height="20px"/> <span class="ms-1"> Comments</span></button>';
         echo '    </div>';
         echo '    <div class="col-sm-4 col-3 px-0 px-lg-2">';
-        echo '      <button class="btn w-100 "><i class="fa-solid fa-share"></i> Share</button>';
+        echo '      <button class="btn w-100 "><img src="img/share.png" width="20px" height="20px"/> <span class="ms-1"> Share</span></button>';
         echo '    </div>';
         echo '  </div>';
         echo '  <hr class="mt-0">';

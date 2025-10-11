@@ -102,32 +102,62 @@ if (!isset($_SESSION['user_id'])) {
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content border-0">
           <div class="modal-header">
-            <h5 class="modal-title w-100 text-center">Edit Details</h5>
+            <h5 class="modal-title w-100 text-center">Edit Profile</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
           </div>
           <div class="modal-body px-0">
-            <form id="profile-form" class="h-100 d-flex flex-column">
+            <form id="profile-form" class="profile-form d-flex flex-column">
+              <div class="modal-form-container">
+              <div class="mb-4 px-4 mt-5 field-section-container">
+                <div class="w-100 d-flex justify-content-between">
+                  <label class="form-label">Name</label>
+                  <input type="text" name="Name" class="form-control mt-2 ps-0 text-center w-50" required disabled>
+                  <button type="button" class="btn text-primary edit-btn">Edit</button>
+                </div>
               
-              <div class="mb-4 px-4 mt-5">
-                <label class="form-label">Name</label>
-                <input type="text" name="Name" class="form-control mt-2 ps-0" required>
+                 <div class="d-flex justify-content-center gap-3 mt-auto  pt-3 px-4 d-none field-save-btn">
+                  <button class="btn feild-cancel-btn btn-light"  type="button">Cancel</button>
+                  <button type="submit" class="btn btn-primary px-5">Save</button>
+                </div>
               </div>
-              <div class="mb-4 px-4">
-                <label class="form-label">Email</label>
-                <input type="email" name="Email_id" class="form-control mt-2 ps-0" required>
+              <div class="mb-4 px-4 field-section-container">
+                <div class="w-100 d-flex justify-content-between">
+                  <label class="form-label">Email</label>
+                  <input type="email" name="Email_id" class="form-control mt-2 ps-0 text-center w-50" required disabled>
+                  <button type="button" class="btn  edit-btn text-primary">Edit</button>
+                </div>
+               
+                 <div class="d-flex justify-content-center gap-3 mt-auto  pt-3 px-4 d-none field-save-btn">
+                  <button class="btn feild-cancel-btn btn-light"  type="button">Cancel</button>
+                  <button type="submit" class="btn btn-primary px-5">Save</button>
+                </div>
               </div>
-              <div class="mb-4 px-4">
-                <label class="form-label">Address</label>
-                <input type="text" name="Address" class="form-control mt-2 ps-0">
+              <div class="mb-4 px-4 field-section-container">
+                <div class="w-100 d-flex justify-content-between">
+                  <label class="form-label">Address</label>
+                  <input type="text" name="Address" class="form-control mt-2 ps-0 text-center w-50" disabled>
+                  <button type="button" class="btn edit-btn text-primary">Edit</button>
+                </div>
+                <div class="d-flex justify-content-center gap-3 mt-auto  pt-3 px-4 d-none field-save-btn">
+                  <button class="btn feild-cancel-btn btn-light"  type="button">Cancel</button>
+                  <button type="submit" class="btn btn-primary px-5">Save</button>
+                </div>
+
               </div>
-              <div class="mb-4 px-4">
-                <label class="form-label">Phone</label>
-                <input type="text" name="Phone" class="form-control mt-2 ps-0">
+              <div class="mb-4 px-4 field-section-container">
+                <div class="w-100 d-flex justify-content-between">
+                  <label class="form-label">Phone</label>
+                  <input type="text" name="Phone" class="form-control mt-2 ps-0 text-center w-50" disabled>
+                  <button type="button" class="btn  edit-btn text-primary">Edit</button>
+                </div>
+                <div class="d-flex justify-content-center gap-3 mt-auto  pt-3 px-4 d-none field-save-btn">
+                  <button class="btn feild-cancel-btn btn-light"  type="button">Cancel</button>
+                  <button type="submit" class="btn btn-primary px-5">Save</button>
+                </div>
+
               </div>
-              <div class="d-flex justify-content-end gap-3 mt-auto border-top pt-3 px-4">
-                <button class="btn modal-cancel-btn" id="cancel-btn" type="button">Cancel</button>
-                <button type="submit" class="btn btn-primary px-5">Save</button>
               </div>
+
             </form>
           </div>
          
@@ -164,7 +194,7 @@ if (!isset($_SESSION['user_id'])) {
                <div class="col-lg-6 col-12">
                 <div class="h-100">
                   <div class="d-flex flex-column justify-content-end  summary-detail-container ps-lg-4 ps-xl-0">
-                    <h3 class="username text-center text-lg-start mt-2 mt-xl-0">Mark Zuckerberg <span><img src="img//verified-account.svg" alt=""></span></h3>
+                    <h3 class="username text-center text-lg-start mt-2 mt-xl-0" id="profile-username">Mark Zuckerberg <span><img src="img//verified-account.svg" alt=""></span></h3>
                     <span class="followers-count text-center text-lg-start">120M followers</span>
                     <div class="friends-images-container text-center text-lg-start">
                       <img class="rounded-circle profile-summary-start-image position-relative" src="img/summary_image_1.png" alt="">
@@ -227,7 +257,7 @@ if (!isset($_SESSION['user_id'])) {
         ############################################################## -->
         <div class=" profile-post-content row g-0">
           <div class="mt-3  col-12 col-xl-11 px-4 px-xl-0 px-sm-5 mx-auto responsive-xxl-footer post-footer-container">
-                <div class="row g-4 post-container-footer">
+                <div class="row g-4 post-container-footer pb-4">
                     <div class="col-lg-5 col-12 p-0">
                       <div class="w-100 profile-details-card p-3">
                         <h5 class="intro-heading">Intro</h5>
@@ -290,7 +320,7 @@ if (!isset($_SESSION['user_id'])) {
                         <!-- ##########################################################
                                                     Post Adding Form
                         ############################################################## -->
-                       <div class="w-100 bg-white p-3 mt-3 post-form-container">
+                       <div class="w-100 bg-white p-3 mt-3 post-form-container" id="post-form-container">
                           <form id="post-form">
                               <textarea name="post_content" id="post-content" class="form-control mt-2" placeholder="Write something to post...!" rows="3" required></textarea>
                               <div class="d-flex justify-content-end">

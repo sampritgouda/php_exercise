@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             echo "<div class='alert alert-success text-center  position-fixed top-0 w-100'>Login successful! Welcome, " . htmlspecialchars($user['Name']) . ".</div>
              <script>
                     setTimeout(function() {
-                        window.location.href = 'dashboard.php';
+                        window.location.href = 'dashboard.php?user_id=" . $user['User_id'] . "';
                     }, 2000); // 2000ms = 2 seconds
                 </script>";
             
