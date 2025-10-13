@@ -48,27 +48,27 @@ if (!isset($_SESSION['user_id'])) {
       <!-- NAV ICONS -->
       <div class="col-sm-7 col-xl-7 col-lg-8 d-none d-sm-inline  topbar-nav">
         <div class="d-flex h-100 topbar-nav-container">
-            <button class="topbar-nav-icons btn h-100"><img src="img//home.svg" class="svg-icon-image" alt="">  </button>
-            <button class="topbar-nav-icons btn h-100"><img src="img/video.svg" class="svg-icon-image" alt="">  </button>
-            <button class="topbar-nav-icons btn h-100"><img src="img/video2.svg"class="svg-icon-image"  alt=""> </button>
-            <button class="topbar-nav-icons btn h-100"><img src="img/group.svg" class="svg-icon-image" alt="">  </button>
-            <button class="topbar-nav-icons btn h-100"><img src="img/gaming.svg"class="svg-icon-image"  alt=""> </button>
+            <button class="topbar-nav-icons btn h-100" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Home"><img src="img//home.svg" class="svg-icon-image" alt="">  </button>
+            <button class="topbar-nav-icons btn h-100" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Video"><img src="img/video.svg" class="svg-icon-image" alt="">  </button>
+            <button class="topbar-nav-icons btn h-100" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Marketplace"><img src="img/video2.svg"class="svg-icon-image"  alt=""> </button>
+            <button class="topbar-nav-icons btn h-100" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Groups"><img src="img/group.svg" class="svg-icon-image" alt="">  </button>
+            <button class="topbar-nav-icons btn h-100" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Gaming"><img src="img/gaming.svg"class="svg-icon-image"  alt=""> </button>
         </div>
       </div>
 
       <!-- TOPBAR PROFILE SECTION -->
       <div class="col-sm-3 col-xl-2 col-7 ms-auto top-bar-profile-container">
         <div class="d-flex gap-2 h-100 py-2 justify-content-end pe-2">
-          <div class="rounded-circle topbar-svg-container p-xl-3"><img src="img/menu.svg" alt="" class="top-bar-profile-svg-image"></div>
-          <div class="rounded-circle topbar-svg-container">
+          <div class="rounded-circle topbar-svg-container p-xl-3" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Menu"><img src="img/menu.svg" alt="" class="top-bar-profile-svg-image"></div>
+          <div class="rounded-circle topbar-svg-container" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Messenger">
             <img src="img/messenger.svg" alt="" class="top-bar-profile-svg-image">
             <span class="notification-numbers">1</span>
           </div>
-          <div class="rounded-circle topbar-svg-container">
+          <div class="rounded-circle topbar-svg-container" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Notifications">
             <img src="img/notification.svg" alt="" class="top-bar-profile-svg-image">
             <span class="notification-numbers">2</span>
           </div>
-          <div class="rounded-circle topbar-svg-container" id="profile-toggle">
+          <div class="rounded-circle topbar-svg-container" id="profile-toggle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Account">
             <div class="overflow-hidden rounded-circle">
               <img src="img/profilepic.jpg" alt="" width="100%" height="100%">
             </div>
@@ -171,7 +171,7 @@ if (!isset($_SESSION['user_id'])) {
                       PROFILE BANNER
      ################################################### -->
       <div class="row g-0 profile-banner-container cover-img-row">
-        <div class="col-12 col-xl-11 mx-auto profile-banner-container responsive-xxl">
+        <div class="col-12 col-xxl-11 col-xl-10 mx-auto profile-banner-container responsive-xxl">
           <div class="profile-banner border-bottom rounded overflow-hidden">
               <img src="img/cover-img.jpg" alt="" width="100%" class="banner-image">
           </div>
@@ -183,8 +183,8 @@ if (!isset($_SESSION['user_id'])) {
                                  Profile Summary
       ############################################################## -->
       <div class="row g-0 profile-banner-container  profile-page-footer-container">
-        <div class="col-xl-11  col-12 p-0 mx-auto responsive-xxl-footer">
-        <div class="px-3">
+        <div class="col-xxl-11 col-xl-10 col-12 p-0 mx-auto responsive-xxl-footer">
+        <div class="px-3  responsive-padding-summary">
            <div class="row g-0 profile-summary">
                <div class="col-lg-2 col-12 profile-summary-image">
                 <div class="rounded-circle overflow-hidden dp-image-container text-center mx-auto mx-xl-0">
@@ -193,7 +193,7 @@ if (!isset($_SESSION['user_id'])) {
                </div>
                <div class="col-lg-6 col-12">
                 <div class="h-100">
-                  <div class="d-flex flex-column justify-content-end  summary-detail-container ps-lg-4 ps-xl-0">
+                  <div class="d-flex flex-column justify-content-end  summary-detail-container ps-lg-4 ps-xl-5 ps-xxl-0">
                     <h3 class="username text-center text-lg-start mt-2 mt-xl-0" id="profile-username">Mark Zuckerberg <span><img src="img//verified-account.svg" alt=""></span></h3>
                     <span class="followers-count text-center text-lg-start">120M followers</span>
                     <div class="friends-images-container text-center text-lg-start">
@@ -212,7 +212,7 @@ if (!isset($_SESSION['user_id'])) {
                   </div>
                 </div>
                </div>
-               <div class="col-lg-4 col-xl-3 col-12 mb-2">
+               <div class="col-lg-4 col-xl-3  col-12 mb-2">
                 <div class="d-flex align-items-end h-100 justify-content-lg-end justify-content-center mt-xl-3 mt-2 mt-xl-0 pb-2 pb-lg-3 pb-xl-2">
                   <div class="d-flex gap-2 mt-auto summary-actions">
                     <button class="follow-buttton d-flex align-items-center gap-2"><img src="img/follow-icon.png" alt="" class="follow-icon">Follow</button>
@@ -229,7 +229,7 @@ if (!isset($_SESSION['user_id'])) {
                                       Profile Nav Tab
             ############################################################## -->
            <div class="row g-0">
-               <div class="col-xl-10 col-10 nav-tabs-container">
+               <div class="col-xxl-10 col-xl-9 col-10 nav-tabs-container">
                    <div class="d-flex h-100 py-1">
                        <div class="px-3 h-100 d-flex align-items-center profile-nav-tabs active"><span >Posts</span></div>
                        <div class="px-3 h-100 d-flex align-items-center profile-nav-tabs about-btn"><span >About</span></div>
@@ -240,7 +240,7 @@ if (!isset($_SESSION['user_id'])) {
                        <div class="px-3 h-100 align-items-center d-flex profile-nav-tabs "><span>More <img src="img/more-down-arrow.svg" alt=""></span></div>
                    </div>
                </div>
-               <div class="col-xl-1 col-2 ms-xl-5 my-auto ps-4 ps-xl-0">
+               <div class="col-xl-3 col-xxl-1 col-2 ms-xxl-5 my-auto ps-4 ps-xl-0">
                 <div class="d-flex justify-content-end">
                   <div class="doted-button px-3">
                     <img src="img/3-dots.svg" alt="">
@@ -256,7 +256,7 @@ if (!isset($_SESSION['user_id'])) {
                               Profile Intro Card
         ############################################################## -->
         <div class=" profile-post-content row g-0">
-          <div class="mt-3  col-12 col-xl-11 px-4 px-xl-0 px-sm-5 mx-auto responsive-xxl-footer post-footer-container">
+          <div class="mt-3  col-12 col-xxl-11 col-xl-10 px-4 px-xl-0 px-sm-5 mx-auto responsive-xxl-footer post-footer-container">
                 <div class="row g-4 post-container-footer pb-4">
                     <div class="col-lg-5 col-12 p-0">
                       <div class="w-100 profile-details-card p-3">

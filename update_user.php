@@ -36,8 +36,8 @@ if ($name !== null && strlen($name) > 25) {
     exit;
 }
 
-if ($email !== null && strlen($email) > 25) {
-    echo json_encode(['status' => 'error', 'message' => 'Email should not exceed 25 characters.']);
+if ($email !== null && strlen($email) > 30) {
+    echo json_encode(['status' => 'error', 'message' => 'Email should not exceed 30 characters.']);
     exit;
 }
 

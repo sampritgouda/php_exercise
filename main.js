@@ -65,6 +65,7 @@ $(document).ready(function(){
 
 
     $(document).on('click',()=>{
+        
       $('#profile-popup').hide();
     })
 
@@ -205,22 +206,30 @@ $(document).ready(function(){
 
 
 
-    $('#profileModal').on('click', '.edit-btn, .feild-cancel-btn', function() {
-    const input = $(this).closest('.field-section-container').find('input'); // find related input
-    const buttons = $(this).closest('.field-section-container').find('.field-save-btn'); 
-    const edit_btn = $(this).closest('.field-section-container').find('.edit-btn'); 
-    // Toggle input enable/disable
-    if (input.prop('disabled')) {
-        input.addClass('enabled');
-        buttons.removeClass('d-none');
-        input.prop('disabled', false).focus(); // enable and focus
-        edit_btn.text('Cancel');
+$('#profileModal').on('click', '.edit-btn, .feild-cancel-btn', function() {
+    const $clickedSection = $(this).closest('.field-section-container');
+    const $input = $clickedSection.find('input');
+    const $buttons = $clickedSection.find('.field-save-btn');
+    const $editBtn = $clickedSection.find('.edit-btn');
+
+    // If input is currently disabled -> go to edit mode
+    if ($input.prop('disabled')) {
+        // Disable all other inputs and hide their buttons
+        $('.field-section-container input').prop('disabled', true).removeClass('enabled');
+        $('.field-section-container .field-save-btn').addClass('d-none');
+        $('.field-section-container .edit-btn').text('Edit');
+
+        // Enable only the clicked one
+        $input.prop('disabled', false).addClass('enabled').focus();
+        $buttons.removeClass('d-none');
+        $editBtn.text('Cancel');
     } else {
-        input.removeClass('enabled');
-        buttons.addClass('d-none');
-        input.prop('disabled', true); // disable again
-        edit_btn.text('Edit');
+        // Cancel mode
+        $input.prop('disabled', true).removeClass('enabled');
+        $buttons.addClass('d-none');
+        $editBtn.text('Edit');
     }
-  });
+});
+
 
 });

@@ -106,6 +106,27 @@ body{
     padding-top: 3px;
 }
 
+.tooltip {
+  opacity: 1 !important;
+  margin-top: 6px !important;
+}
+
+/* Tooltip background and text */
+.tooltip-inner {
+  background-color: #242526 !important; /* dark gray */
+  color: #fff !important;
+  font-size: 0.8rem;
+  font-weight: 500;
+  border-radius: 6px;
+  padding: 4px 10px;
+  box-shadow: none !important;
+  border: none !important;
+}
+
+/* Remove the arrow completely (optional) */
+.tooltip-arrow {
+  display: none !important;
+}
 /*********************************************************
                     Profile Banner
 **********************************************************/
@@ -414,7 +435,7 @@ body{
 }
 
 .modal .form-control{
-    padding: 30px;
+    padding: 30px 10px;
     border: none;
     border-radius: 0;
     color: black;
@@ -592,16 +613,12 @@ body{
     .profile-summary{
         margin-top: -30px;
     }
-    .search-bar-container{
-        width: 40px;
-        height: 40px;
-        padding-left: 12px;
-    }
+    
     .banner-image{
-        margin-top: -170px;
+        margin-top: -160px;
     }
-    .post-footer-container{
-        padding: 0 30px !important;
+     .post-footer-container{
+        padding: 0 !important;
     }
     
 }
@@ -613,10 +630,23 @@ body{
         padding: 0 20px;
     }
     .topbar-nav{
-        padding-left: 10px;
+        padding-left: 0px;
     }
     .profile-page-footer-container{
         padding: 0 25px;
+    }
+    .responsive-padding-summary{
+        padding-left: 40px !important;
+        padding-right: 80px !important;
+    }
+    .nav-tabs-container{
+        padding-left: 30px;
+    }
+    .cover-img-row::after {
+        height: 250px;
+    }
+    .post-footer-container{
+        padding: 0 30px !important;
     }
 }
 
@@ -624,6 +654,12 @@ body{
                         Desktop Screen
 **********************************************************/
 
+@media (min-width:993px) and (max-width:1439px) {
+
+    .profile-banner-container{
+        padding:  0 33px;
+    }
+}
 @media (min-width:1440) and (max-width:1800) {
     .summary-detail-container{
         padding-left: 0px !important;
@@ -635,6 +671,10 @@ body{
     .profile-page-footer-container{
         padding: 0 25px;
     }
+    .nav-tabs-container{
+        margin-left: 28px;
+    }
+    
 }
 
 
@@ -656,18 +696,22 @@ body{
     }
 
     .profile-banner{
-        max-height: 462px;
+        max-height: 350px;
     }
     .profile-summary{
         margin-top: -30px;
     }
-    .nav-tabs-container{
-        margin-left: 28px;
-    }
+    
     .post-container-footer{
         padding-left: 55px;
         padding-right: 54px;
     }
+
+
+    .topbar-nav-icons{
+        width: 115px;
+    }
+    
 }
 
 
@@ -683,6 +727,9 @@ body{
     }
     .profile-banner-container{
         padding: 0;
+    }
+    .profile-banner{
+        max-height: 460px;
     }
 }
 
