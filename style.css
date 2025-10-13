@@ -23,7 +23,7 @@ body{
     z-index: 9999;
     min-height: 56px;
 }
-.topbar-svg-container{
+.topbar .topbar-svg-container{
     cursor: pointer;
     background-color: #E2E5E9;
     height: 40px;
@@ -34,21 +34,21 @@ body{
     position: relative;
 }
 
-.topbar-nav-icons{
+.topbar .topbar-nav-icons{
     width: 130px;
     min-width: 0;
     text-align: center;
 }
-.topbar-nav-icons:hover{
+.topbar .topbar-nav-icons:hover{
     background-color: #E2E5E9;
 }
 
-.topbar-nav-container{
+.topbar .topbar-nav-container{
     gap: 8px;
 }
 
 /* search bar */
-.search-bar-input{
+.topbar .search-bar-input{
     outline: none;
     border: none;
     background: transparent;
@@ -57,7 +57,7 @@ body{
     font-family: sans-serif;
 }
 
-.search-bar-container{
+.topbar .search-bar-container{
     border-radius: 20px;
     background-color: #F0F2F5;
     height: 80%;
@@ -69,7 +69,7 @@ body{
 }
 
 /* notification icon */
-.notification-numbers{
+.topbar .notification-numbers{
     position: absolute;
     width: 19px;
     height: 19px;
@@ -84,7 +84,7 @@ body{
     font-size: 13px;
 }
 
-.profile-down-arrow{
+.topbar .profile-down-arrow{
     height: 15px;
     width: 15px;
     display: flex;
@@ -97,76 +97,56 @@ body{
     right: -1px;
 }
 
-.top-bar-profile-container{
+.topbar .top-bar-profile-container{
     margin-right: -8px;
 }
-.topbar-nav{
+.topbar .topbar-nav{
     padding-left: 150px;
     padding-bottom: 3px;
     padding-top: 3px;
 }
 
-.tooltip {
-  opacity: 1 !important;
-  margin-top: 6px !important;
-}
 
-/* Tooltip background and text */
-.tooltip-inner {
-  background-color: #242526 !important; /* dark gray */
-  color: #fff !important;
-  font-size: 0.8rem;
-  font-weight: 500;
-  border-radius: 6px;
-  padding: 4px 10px;
-  box-shadow: none !important;
-  border: none !important;
-}
-
-/* Remove the arrow completely (optional) */
-.tooltip-arrow {
-  display: none !important;
-}
 /*********************************************************
                     Profile Banner
 **********************************************************/
-.banner-image{
+.profile-banner-container .banner-image{
     margin-top: -210px;
     z-index: 99;
     position: relative;
 }
 
 
-.profile-summary{
+.profile-page-footer-container .profile-summary{
     position: relative;
     z-index: 999;
 }
 
 
-.dp-image-container{
+.profile-page-footer-container .dp-image-container{
     width: 175px;
     height: 175px;
     border: 4px solid #ffffff;
 }
 
-.dp-image{
+.profile-page-footer-container .dp-image{
     /* object-fit: fill; */
     height: 100%;
     width: 100%;
     transform-origin: 0px 0px;
 }
 
-.followers-count{
+.profile-page-footer-container .followers-count{
     color: #65686C;
     font-size: 15px;
     font-weight: 600;
 }
 
-.cover-img-row {
+.profile-page-footer-container .cover-img-row {
     position: relative;
     overflow: hidden;
 }
-.cover-img-row::after {
+.profile-page-footer-container .cover-img-row::after {
     content: "";
     position: absolute;
     top: 0;
@@ -186,46 +166,46 @@ body{
 /*********************************************************
                         Profile Summary
 **********************************************************/
-.username{
+.profile-page-footer-container .username{
     font-weight: 700;
     font-size: 32px;
     margin-bottom: 4px;
 }
 
-.friends-images{
+.profile-page-footer-container .friends-images{
     margin-left: -14px;
     border: 3px solid #ffffff;
 }
 
 
-.friends-images-container{
+.profile-page-footer-container .friends-images-container{
     margin-top: 10px;
 }
 
-.follow-buttton{
+.profile-page-footer-container .follow-buttton{
     background-color: #0866FF;
     color: #ffffff;
 }
 
-.follow-icon{
+.profile-page-footer-container .follow-icon{
      filter: invert(1) brightness(2);
 }
-.profile-summary-search, .profile-summary-dropdown{
+.profile-page-footer-container .profile-summary-search, .profile-summary-dropdown{
     background-color: #E2E5E9;
 }
 
-.profile-summary-image-dot{
+.profile-page-footer-container .profile-summary-image-dot{
     z-index: 9;
     top: 15%;
     left: 25%;
     filter: invert(1) brightness(2);
 }
-.profile-summary-end-image {
+.profile-page-footer-container .profile-summary-end-image {
     filter:  brightness(60%);
 }
-.follow-buttton,
-.profile-summary-dropdown,
-.profile-summary-search{
+.profile-page-footer-container .follow-buttton,
+.profile-page-footer-container .profile-summary-dropdown,
+.profile-page-footer-container .profile-summary-search{
     border: none;
     border-radius: 10px;
     padding: 7px 11px;
@@ -234,20 +214,20 @@ body{
     font-size: 15px;
 }
 
-.profile-summary-dropdown{
+.profile-page-footer-container .profile-summary-dropdown{
     padding: 7px 18px;
 }
-.profile-summary-dropdown img{
+.profile-page-footer-container.profile-summary-dropdown img{
     width: 15px;
     height: 15px;
 }
 
-.horizontal-line{
+.profile-page-footer-container .horizontal-line{
     width: 96%;
     margin-bottom: 0;
 }
 
-.profile-nav-tabs{
+.profile-page-footer-container .profile-nav-tabs{
     color: #65686c;
     font-size: 15px;
     font-family: Arial, Helvetica, sans-serif;
@@ -255,13 +235,13 @@ body{
     cursor: pointer;
     border-radius: 8px;
 }
-.profile-nav-tabs.active {
+.profile-page-footer-container .profile-nav-tabs.active {
   color: #0064d1;
   border-radius: 0;
   position: relative; 
 }
 
-.profile-nav-tabs.active::after {
+.profile-page-footer-container .profile-nav-tabs.active::after {
   content: "";
   position: absolute;
   left: 0;
@@ -271,50 +251,50 @@ body{
   background-color: #0064d1; 
 }
 
-.profile-nav-tabs:hover{
+.profile-page-footer-container .profile-nav-tabs:hover{
     background-color: #F0F2F5;
 }
-.nav-tabs-container{
+.profile-page-footer-container .nav-tabs-container{
     height: 60px;
 }
 
-.doted-button{
+.profile-page-footer-container .doted-button{
     background-color: #E2E5E9;
     height: 36px;
     display: flex;
     align-items: center;
     border-radius: 8px;
 }
-.profile-summary-start-image { 
+.profile-page-footer-container .profile-summary-start-image { 
     z-index: 8; 
     border: 3px solid #ffffff;
 }
-.friends-images:nth-child(2) { z-index: 7; }
-.friends-images:nth-child(3) { z-index: 6; }
-.friends-images:nth-child(4) { z-index: 5; }
-.friends-images:nth-child(5) { z-index: 4; }
-.friends-images:nth-child(6) { z-index: 3; }
-.friends-images:nth-child(7) { z-index: 2; }
+.profile-page-footer-container .friends-images:nth-child(2) { z-index: 7; }
+.profile-page-footer-container .friends-images:nth-child(3) { z-index: 6; }
+.profile-page-footer-container .friends-images:nth-child(4) { z-index: 5; }
+.profile-page-footer-container .friends-images:nth-child(5) { z-index: 4; }
+.profile-page-footer-container .friends-images:nth-child(6) { z-index: 3; }
+.profile-page-footer-container .friends-images:nth-child(7) { z-index: 2; }
 /*********************************************************
                         Profile post section
 **********************************************************/
 
-.profile-post-content{
+.profile-page-footer-container .profile-post-content{
     background-color: #F2F4F7;
 }
 
-.friend-images-content{
+.profile-page-footer-container .friend-images-content{
    width: 100px;
    
 }
-.friend-container-heading{
+.profile-page-footer-container .friend-container-heading{
     font-weight: 700;
 }
-.profile-details-card,
-.post-heading-card,
-.post-form-container,
-.post-card,
-.friend-list-container{
+.profile-page-footer-container .profile-details-card,
+.profile-page-footer-container .post-heading-card,
+.profile-page-footer-container .post-form-container,
+.profile-page-footer-container .post-card,
+.profile-page-footer-container .friend-list-container{
     background-color: #ffffff;
     border-radius: 15px;
     font-size: 15px;
@@ -322,7 +302,7 @@ body{
     box-shadow: 0 1px 2px rgba(0, 0, 0, .2);
 }
 
-.profile-details-card img{
+.profile-page-footer-container .profile-details-card img{
    filter: invert(40%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(150%) !important;
    height: 20px;
    width: 20px;
@@ -330,7 +310,7 @@ body{
 .profile-details-card{
     max-height: 470px;
 }
-.filter-button{
+.profile-page-footer-container .filter-button{
     background-color: #E2E5E9;
     border: none;
     border-radius: 8px;
@@ -338,14 +318,14 @@ body{
     height: 36px;
 }
 
-.post-card-heading{
+.profile-page-footer-container .post-card-heading{
     font-weight: 600;
 }
 
-.post-text{
+.profile-page-footer-container .post-text{
     font-size: 15px;
 }
-.post-time{
+.profile-page-footer-container .post-time{
     font-size: 13px;
     color: #65686C;
 }
@@ -370,15 +350,15 @@ body{
 .profile-popup hr {
   margin: 8px 0;
 }
-.intro-heading{
+.profile-page-footer-container .intro-heading{
     font-weight: 700;
 }
-.post-action-count{
+.profile-page-footer-container .post-action-count{
     color: #65686C;
     font-size: 15px;
 }
 
-.post-action-btn .btn{
+.profile-page-footer-container .post-action-btn .btn{
     color: #65686C;
     font-size: 15px;
     font-weight: bold;
@@ -387,12 +367,12 @@ body{
     cursor: pointer;
 }
 
-.post-card-text{
+.profile-page-footer-container .post-card-text{
     font-size: 23px;
     word-wrap: break-word;
 }
 
-#friend-list{
+.profile-page-footer-container #friend-list{
     display: flex;
 }
 /*********************************************************
@@ -402,7 +382,7 @@ body{
 .profile-popup-header:hover{
     background-color: #E2E5E9;
 }
-.modal-dialog{
+.modal .modal-dialog{
     max-width: 35% !important;
 }
 .popup-profile-name{
@@ -413,7 +393,7 @@ body{
   background-color: rgba(255, 255, 255, 0.85);
    z-index: 9999;
 }
-.modal-title{
+.modal .modal-title{
     font-size: 20px;
     font-weight: 700;
 }
@@ -424,12 +404,12 @@ body{
     width: 20px;
     height:20px;
 }
-.modal-dialog .form-label{
+.modal .modal-dialog .form-label{
     font-weight: 800;
     font-size: 18px;
 }
 
-.modal-content{
+.modal .modal-content{
     height: 80vh;
     box-shadow: 0 12px 28px 0  rgba(0, 0, 0, .2) ,0 2px 4px 0 rgba(0, 0, 0, .1),inset 0 0 0 1px rgba(255, 255, 255, .5);
 }
@@ -453,13 +433,13 @@ body{
     box-shadow: none;
 }
 
-.modal-cancel-btn{
+.modal .modal-cancel-btn{
     background-color: #E2E5E9;
     color: black;
     font-weight: 700;
 }
 
-#friends-count{
+.profile-page-footer-container #friends-count{
     opacity: 0.8;
     font-weight: 300;
 }
@@ -468,19 +448,19 @@ body{
     background:none ;
 }
 
-.modal-form-container{
+.modal .modal-form-container{
     height: 100%;
     overflow-y: auto;
 }
-.profile-form{
+.modal .profile-form{
     height: 100%;
 }
 
-.modal-form-container .edit-btn{
+.modal .modal-form-container .edit-btn{
     max-height: 40px;
 }
 
-.modal .modal-body{
+.modal .modal .modal-body{
     overflow-y: auto;
 }
 
@@ -489,16 +469,16 @@ body{
 **********************************************************/
 @media  (max-width:325px) {
 
-    .about-btn{
+    .profile-page-footer-container .about-btn{
         display: none !important;
     }
-    .follow-buttton,
-    .profile-summary-search{
+    .profile-page-footer-container .follow-buttton,
+    .profile-page-footer-container .profile-summary-search{
         width: 100px;
         display: flex;
         justify-content: center;
     }
-    .profile-summary-dropdown{
+    .profile-page-footer-container .profile-summary-dropdown{
         width: 60px;
     }
     .profile-banner{
@@ -572,7 +552,7 @@ body{
     .profile-summary{
         margin-top: -85px;
     }
-    .topbar-nav{
+    .topbar .topbar-nav{
         padding-left: 100px;
         margin-left: 45px;
     }
@@ -618,7 +598,7 @@ body{
         margin-top: -160px;
     }
      .post-footer-container{
-        padding: 0 !important;
+        padding: 0 30px !important;
     }
     
 }
@@ -629,7 +609,7 @@ body{
     .profile-banner-container{
         padding: 0 20px;
     }
-    .topbar-nav{
+    .topbar .topbar-nav{
         padding-left: 0px;
     }
     .profile-page-footer-container{
@@ -654,12 +634,7 @@ body{
                         Desktop Screen
 **********************************************************/
 
-@media (min-width:993px) and (max-width:1439px) {
 
-    .profile-banner-container{
-        padding:  0 33px;
-    }
-}
 @media (min-width:1440) and (max-width:1800) {
     .summary-detail-container{
         padding-left: 0px !important;
@@ -722,7 +697,7 @@ body{
     .responsive-xxl-footer{
         max-width: 1270px !important;
     }
-    .topbar-nav{
+    .topbar .topbar-nav{
         padding-left: 128px;
     }
     .profile-banner-container{
@@ -734,7 +709,7 @@ body{
 }
 
 @media (min-width:2100px){
-    .topbar-nav{
+    .topbar .topbar-nav{
         padding-left: 9%;
     }
 }

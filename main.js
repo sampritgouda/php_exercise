@@ -74,27 +74,31 @@ $(document).ready(function(){
     // Open modal and fetch user data
     $('#user-info').on('click', function(){
         profileModal.show();
-
-        $.ajax({
-            url: 'fetch_user.php',
-            type: 'GET',
-            dataType: 'json',
-            success: function(res){
-                if(res.status === 'success'){
-                    var data = res.data;
-                    $('#profile-form [name="Name"]').val(data.Name);
-                    $('#profile-form [name="Email_id"]').val(data.Email_id);
-                    $('#profile-form [name="Address"]').val(data.Address);
-                    $('#profile-form [name="Phone"]').val(data.Phone);
-                } else {
-                    showMessage('warning', res.message);
-                }
-            },
-            error: function(){
-                showMessage('error', 'Error loading profile.');
-            }
-        });
+        fetch_user();
     });
+
+    function fetch_user() {
+    $.ajax({
+        url: 'fetch_user.php',
+        type: 'GET',
+        dataType: 'json',
+        success: function(res){
+            if(res.status === 'success'){
+                var data = res.data;
+                $('#profile-form [name="Name"]').val(data.Name);
+                $('#profile-form [name="Email_id"]').val(data.Email_id);
+                $('#profile-form [name="Address"]').val(data.Address);
+                $('#profile-form [name="Phone"]').val(data.Phone);
+            } else {
+                showMessage('warning', res.message);
+            }
+        },
+        error: function(){
+            showMessage('error', 'Error loading profile.');
+        }
+    });
+}
+
 
     // Handle profile update
     $('#profile-form').on('submit', function(e){
@@ -107,8 +111,20 @@ $(document).ready(function(){
             dataType: 'json',
             success: function(res){
                 if(res.status === 'success'){
-                      showMessage('success', res.message);
                       fetch_name();
+                      fetch_user();
+                      const $enabledInput = $('#profile-form input.enabled');
+                $enabledInput.each(function() {
+                    $(this).data('old-value', $(this).val()); // <-- set to new saved value
+                    $(this).prop('disabled', true).removeClass('enabled');
+                });
+
+                // Reset buttons
+                $('.field-section-container .field-save-btn').addClass('d-none');
+                $('.field-section-container .edit-btn').text('Edit');
+
+                      showMessage('success', res.message);
+
                 } else {
                     showMessage('warning', res.message);
                 }
@@ -212,24 +228,50 @@ $('#profileModal').on('click', '.edit-btn, .feild-cancel-btn', function() {
     const $buttons = $clickedSection.find('.field-save-btn');
     const $editBtn = $clickedSection.find('.edit-btn');
 
-    // If input is currently disabled -> go to edit mode
-    if ($input.prop('disabled')) {
-        // Disable all other inputs and hide their buttons
-        $('.field-section-container input').prop('disabled', true).removeClass('enabled');
-        $('.field-section-container .field-save-btn').addClass('d-none');
-        $('.field-section-container .edit-btn').text('Edit');
+    // Check if this section is going into edit mode
+    const goingToEdit = $input.prop('disabled');
 
-        // Enable only the clicked one
+    // --- Before enabling a new edit, revert all others ---
+    $('.field-section-container').each(function() {
+        const $section = $(this);
+        const $inp = $section.find('input');
+        const $btns = $section.find('.field-save-btn');
+        const $edBtn = $section.find('.edit-btn');
+
+        // If any field has unsaved edits → revert to old value
+        const oldVal = $inp.data('old-value');
+        if (oldVal !== undefined && !$inp.prop('disabled')) {
+            $inp.val(oldVal);
+        }
+
+        // Disable everything & hide save buttons
+        $inp.prop('disabled', true).removeClass('enabled');
+        $btns.addClass('d-none');
+        $edBtn.text('Edit');
+    });
+
+    // --- If going to edit this section ---
+    if (goingToEdit) {
+        // Enable current input
         $input.prop('disabled', false).addClass('enabled').focus();
         $buttons.removeClass('d-none');
         $editBtn.text('Cancel');
+
+        // Store original value
+        $input.data('old-value', $input.val());
     } else {
-        // Cancel mode
+        // Cancel mode → revert to stored value
+        const oldValue = $input.data('old-value');
+        if (oldValue !== undefined) {
+            $input.val(oldValue);
+        }
+
         $input.prop('disabled', true).removeClass('enabled');
         $buttons.addClass('d-none');
         $editBtn.text('Edit');
     }
 });
+
 
 
 });
