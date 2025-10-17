@@ -121,6 +121,7 @@ if (!isset($_SESSION['user_id'])) {
                     <button type="submit" class="btn btn-primary px-5">Save</button>
                   </div>
                 </div>
+                <!-- email  -->
                 <div class="mb-4 px-4 field-section-container">
                   <div class="w-100 d-flex justify-content-between">
                     <label class="form-label">Email</label>
@@ -133,6 +134,7 @@ if (!isset($_SESSION['user_id'])) {
                     <button type="submit" class="btn btn-primary px-5">Save</button>
                   </div>
                 </div>
+                <!-- address -->
                 <div class="mb-4 px-4 field-section-container">
                   <div class="w-100 d-flex justify-content-between">
                     <label class="form-label">Address</label>
@@ -143,8 +145,8 @@ if (!isset($_SESSION['user_id'])) {
                     <button class="btn feild-cancel-btn btn-light"  type="button">Cancel</button>
                     <button type="submit" class="btn btn-primary px-5">Save</button>
                   </div>
-
                 </div>
+                <!-- phone -->
                 <div class="mb-4 px-4 field-section-container">
                   <div class="w-100 d-flex justify-content-between">
                     <label class="form-label">Phone</label>

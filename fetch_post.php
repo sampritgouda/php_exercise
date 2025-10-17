@@ -1,7 +1,6 @@
 <?php
-ini_set('display_errors', 1);
-error_reporting(E_ALL);
 session_start();
+//get database connection
 include "db_connection.php";
 
 //checking is loged in
@@ -83,6 +82,7 @@ if($result->num_rows > 0){
         echo '</div>';
     }
 } else {
+    // No posts found
     echo "<div class='post-section'>No posts yet.</div>";
 }
 ?>

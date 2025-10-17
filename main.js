@@ -59,13 +59,13 @@ $(document).ready(function(){
     }
         
     });
+    // Toggle profile popup visibility
     $('#profile-popup').toggle();
 
     });
 
-
+    // Close profile popup when clicking outside
     $(document).on('click',()=>{
-        
       $('#profile-popup').hide();
     })
 
@@ -77,6 +77,7 @@ $(document).ready(function(){
         fetch_user();
     });
 
+    // Fetch user data
     function fetch_user() {
     $.ajax({
         url: 'fetch_user.php',
@@ -97,13 +98,13 @@ $(document).ready(function(){
             showMessage('error', 'Error loading profile.');
         }
     });
-}
+    }
 
 
     // Handle profile update
     $('#profile-form').on('submit', function(e){
         e.preventDefault();
-       console.log($(this).serialize())
+        console.log($(this).serialize())
         $.ajax({
             url: 'update_user.php',
             type: 'POST',
@@ -111,9 +112,9 @@ $(document).ready(function(){
             dataType: 'json',
             success: function(res){
                 if(res.status === 'success'){
-                      fetch_name();
-                      fetch_user();
-                      const $enabledInput = $('#profile-form input.enabled');
+                        fetch_name();
+                        fetch_user();
+                        const $enabledInput = $('#profile-form input.enabled');
                 $enabledInput.each(function() {
                     $(this).data('old-value', $(this).val()); // <-- set to new saved value
                     $(this).prop('disabled', true).removeClass('enabled');
@@ -123,7 +124,7 @@ $(document).ready(function(){
                 $('.field-section-container .field-save-btn').addClass('d-none');
                 $('.field-section-container .edit-btn').text('Edit');
 
-                      showMessage('success', res.message);
+                        showMessage('success', res.message);
 
                 } else {
                     showMessage('warning', res.message);
@@ -149,40 +150,43 @@ $(document).ready(function(){
             }
         });
     });
-
-  $.ajax({
-        url: 'fetch_friend.php',   // your PHP file
+    // Fetch and display friends list
+    $.ajax({
+        url: 'fetch_friend.php',  
         type: 'GET',
         data: { user_id: userId },
         dataType: 'json',
         success: function(response) {
             const friendList = $('#friend-list');
-            friendList.empty(); // clear existing content
+            friendList.empty(); 
 
             if (response.status === 'success' && response.friends.length > 0) {
                 $('#friends-count').text(response.total_friends+' Friends')
                 response.friends.forEach(friend => {
+                    // Append each friend to the list
                     friendList.append(`
-                       <a href="dashboard.php?user_id=${friend.User_id}">
+                        <a href="dashboard.php?user_id=${friend.User_id}">
                         <div class="d-flex align-items-center mb-3"> <div class="d-inline-block text-center me-3 mt-3">
                             <img src="img/default-friend-image.jpg" 
                                 alt="${friend.Name}" 
                                 class="rounded mb-2 friend-images-content" >
                             <h6 class="mb-0">${friend.Name}</h6>
                         </div>
-                       </a>
+                        </a>
                     `);
                 });
             } else {
+                // No friends found
                 friendList.html('<p class="text-muted">No friends found.</p>');
             }
         },
         error: function() {
+            // Error fetching friends
             $('#friend-list').html('<p class="text-danger">Error loading friends.</p>');
         }
     });
 
-
+    // Fetch and display user's name
     function fetch_name(){
             $.ajax({
         url: 'fetch_name.php',
@@ -208,9 +212,9 @@ $(document).ready(function(){
     //  Common message display function
     function showMessage(type, message) {
         const alertClass = type === 'success' ? 'alert-success' :
-                           type === 'error'   ? 'alert-danger'  :
-                           type === 'warning' ? 'alert-warning' : 'alert-info';
-        
+                            type === 'error'   ? 'alert-danger'  :
+                            type === 'warning' ? 'alert-warning' : 'alert-info';
+
         $('#form-message')
             .stop(true, true)
             .hide()
@@ -220,58 +224,56 @@ $(document).ready(function(){
             .fadeOut(500);
     }
 
+    /*============================================================
+            Profile modal edit/cancel button handler
+    ============================================================== */
+    $('#profileModal').on('click', '.edit-btn, .feild-cancel-btn', function() {
+        const $clickedSection = $(this).closest('.field-section-container');
+        const $input = $clickedSection.find('input');
+        const $buttons = $clickedSection.find('.field-save-btn');
+        const $editBtn = $clickedSection.find('.edit-btn');
 
+        // Check if this section is going into edit mode
+        const goingToEdit = $input.prop('disabled');
 
-$('#profileModal').on('click', '.edit-btn, .feild-cancel-btn', function() {
-    const $clickedSection = $(this).closest('.field-section-container');
-    const $input = $clickedSection.find('input');
-    const $buttons = $clickedSection.find('.field-save-btn');
-    const $editBtn = $clickedSection.find('.edit-btn');
+        // --- Before enabling a new edit, revert all others ---
+        $('.field-section-container').each(function() {
+            const $section = $(this);
+            const $inp = $section.find('input');
+            const $btns = $section.find('.field-save-btn');
+            const $edBtn = $section.find('.edit-btn');
 
-    // Check if this section is going into edit mode
-    const goingToEdit = $input.prop('disabled');
+            // If any field has unsaved edits → revert to old value
+            const oldVal = $inp.data('old-value');
+            if (oldVal !== undefined && !$inp.prop('disabled')) {
+                $inp.val(oldVal);
+            }
 
-    // --- Before enabling a new edit, revert all others ---
-    $('.field-section-container').each(function() {
-        const $section = $(this);
-        const $inp = $section.find('input');
-        const $btns = $section.find('.field-save-btn');
-        const $edBtn = $section.find('.edit-btn');
+            // Disable everything & hide save buttons
+            $inp.prop('disabled', true).removeClass('enabled');
+            $btns.addClass('d-none');
+            $edBtn.text('Edit');
+        });
 
-        // If any field has unsaved edits → revert to old value
-        const oldVal = $inp.data('old-value');
-        if (oldVal !== undefined && !$inp.prop('disabled')) {
-            $inp.val(oldVal);
+        // --- If going to edit this section ---
+        if (goingToEdit) {
+            // Enable current input
+            $input.prop('disabled', false).addClass('enabled').focus();
+            $buttons.removeClass('d-none');
+            $editBtn.text('Cancel');
+
+            // Store original value
+            $input.data('old-value', $input.val());
+        } else {
+            // Cancel mode → revert to stored value
+            const oldValue = $input.data('old-value');
+            if (oldValue !== undefined) {
+                $input.val(oldValue);
+            }
+
+            $input.prop('disabled', true).removeClass('enabled');
+            $buttons.addClass('d-none');
+            $editBtn.text('Edit');
         }
-
-        // Disable everything & hide save buttons
-        $inp.prop('disabled', true).removeClass('enabled');
-        $btns.addClass('d-none');
-        $edBtn.text('Edit');
     });
-
-    // --- If going to edit this section ---
-    if (goingToEdit) {
-        // Enable current input
-        $input.prop('disabled', false).addClass('enabled').focus();
-        $buttons.removeClass('d-none');
-        $editBtn.text('Cancel');
-
-        // Store original value
-        $input.data('old-value', $input.val());
-    } else {
-        // Cancel mode → revert to stored value
-        const oldValue = $input.data('old-value');
-        if (oldValue !== undefined) {
-            $input.val(oldValue);
-        }
-
-        $input.prop('disabled', true).removeClass('enabled');
-        $buttons.addClass('d-none');
-        $editBtn.text('Edit');
-    }
-});
-
-
-
 });

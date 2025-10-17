@@ -1,4 +1,5 @@
 <?php
+// get database connection
 include 'db_connection.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -8,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $mobile_number = $_POST['phone-number'];
     $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
-
+    // Check if email already exists
     $checkStmt = $conn->prepare("SELECT * FROM tUser WHERE Email_id = ?");
     $checkStmt->bind_param("s", $email);
     $checkStmt->execute();
@@ -21,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
               </div>";
     } 
     else{
-
+            // Insert new user
             $stmt = $conn->prepare("INSERT INTO tUser (Name, Email_id, Password, Address, Phone) VALUES (?, ?, ? ,? , ?)");
             $stmt->bind_param("sssss", $username, $email, $password ,$address, $mobile_number);
             
@@ -57,24 +58,29 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             <div class="card shadow-sm p-4">
                 <h2 class="mb-4 text-center">Register</h2>
-
+                <!-- register post form -->
                 <form method="POST">
+                    <!-- username -->
                     <div class="mb-3">
                         <label for="username" class="form-label">Username</label> 
                         <input type="text" name="username" class="form-control" required>
                     </div>
+                    <!-- email -->
                     <div class="mb-3">
                         <label for="email" class="form-label">Email</label> 
                         <input type="email" name="email" class="form-control" required>
                     </div>
+                    <!-- passowrd -->
                     <div class="mb-3">
                         <label for="password" class="form-label">Password</label> 
                         <input type="password" name="password" class="form-control" required>
                     </div>
+                    <!-- Address -->
                     <div class="mb-3">
                         <label for="address" class="form-label">Address</label> 
                         <input type="text" name="address" class="form-control" required>
                     </div>
+                    <!-- Phone Number -->
                     <div class="mb-3">
                         <label for="phone-number" class="form-label">Phone Number</label> 
                         <input type="text" name="phone-number" class="form-control" required>

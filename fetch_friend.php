@@ -21,7 +21,7 @@ $sql = "
         END
     WHERE ? IN (f.user_id, f.friend_id)
 ";
-
+//binding parameters
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("iii", $user_id, $user_id, $user_id);
 $stmt->execute();
@@ -44,7 +44,7 @@ if (!empty($friends)) {
         'message' => 'No friends found'
     ]);
 }
-
+//closing connections
 $stmt->close();
 $conn->close();
 ?>

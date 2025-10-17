@@ -111,7 +111,7 @@ if ($stmt->execute()) {
 } else {
     echo json_encode(['status' => 'error', 'message' => 'Failed to update profile.']);
 }
-
+//closing connections
 $stmt->close();
 $conn->close();
 ?>

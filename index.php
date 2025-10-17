@@ -51,16 +51,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <div class="container ">
     <div class="row justify-content-center min-vh-100">
         <div class="col-md-5 h-50 my-auto">
-
+            <!-- login form container -->
             <div class="card shadow-sm p-4">
                 <h2 class="text-center mb-4 text-primary">Login</h2>
-
+                <!-- login form -->
                 <form method="POST">
+                    <!-- Email -->
                     <div class="mb-3">
                         <label for="email" class="form-label">Email</label>
                         <input type="email" name="email" class="form-control" required>
                     </div>
-
+                    <!-- Password -->
                     <div class="mb-3">
                         <label for="password" class="form-label">Password</label>
                         <input type="password" name="password" class="form-control" required>
@@ -68,7 +69,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
                     <button type="submit" class="btn btn-primary w-100">Login</button>
                 </form>
-
+                <!-- register link -->
                 <p class="text-center mt-3 mb-0">
                     Don't have an account? <a href="register.php">Register here</a>
                 </p>
