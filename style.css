@@ -481,10 +481,10 @@ body{
     .profile-page-footer-container .profile-summary-dropdown{
         width: 60px;
     }
-    .profile-banner{
+    .profile-banner-container .profile-banner{
         height: 118px;
     }
-    .banner-image{
+    .profile-banner-container .banner-image{
         margin-top:-52px ;
     }
     .top-bar-profile-container{
@@ -502,7 +502,7 @@ body{
     .post-action-btn .btn{
         padding: 0 !important;
     }
-    .post-action-count{
+    .profile-page-footer-container .post-action-count{
         font-size: 13px;
     }
 }
@@ -511,30 +511,29 @@ body{
     .message-popup .alert{
         width: 95vw;
     }
-    .profile-banner{
+    .profile-banner-container .profile-banner{
         height: 157px;
     }
-    .follow-buttton,
-    .profile-summary-search{
+    .profile-page-footer-container .follow-buttton,
+    .profile-page-footer-container .profile-summary-search{
         width: 40%;
         display: flex;
         justify-content: center;
     }
-    .profile-summary-dropdown{
+    .profile-page-footer-container .profile-summary-dropdown{
         width: 94px;
     }
-    .banner-image{
+    .profile-banner-container .banner-image{
         margin-top: -62px;
     }
-    
-    .summary-actions{
+    .profile-page-footer-container .summary-actions{
         width: 100%;
     }
     .post-action-btn .btn{
         padding: 0 !important;
     }
     @media  (max-width:375px) {
-        .profile-banner{
+        .profile-banner-container .profile-banner{
             height: 140px;
         }
     }
@@ -546,10 +545,10 @@ body{
                         Tab screen
 **********************************************************/
 @media (max-width:992px) {
-    .profile-banner{
+    .profile-banner-container .profile-banner{
         max-height: 285px;
     }
-    .profile-summary{
+    .profile-page-footer-container .profile-summary{
         margin-top: -85px;
     }
     .topbar .topbar-nav{
@@ -572,7 +571,7 @@ body{
     }
     @media (min-width:426px) {
 
-        .banner-image{
+        .profile-banner-container .banner-image{
             margin-top: -129px;
         }
     }
@@ -583,18 +582,16 @@ body{
                         Laptop Screen
 **********************************************************/
 @media (min-width:993px) and (max-width:1439px) {
-    .profile-banner{
+    .profile-banner-container .profile-banner{
         max-height: 380px;
-    }
-    
+    }   
     .summary-detail-container{
         min-height: 160px;
     }
     .profile-summary{
         margin-top: -30px;
-    }
-    
-    .banner-image{
+    } 
+    .profile-banner-container .banner-image{
         margin-top: -160px;
     }
      .post-footer-container{
@@ -635,27 +632,10 @@ body{
 **********************************************************/
 
 
-@media (min-width:1440) and (max-width:1800) {
-    .summary-detail-container{
-        padding-left: 0px !important;
-    }
-    .profile-banner-container{
-        margin-left: 5% !important;
-        margin-right: 5% !important;
-    }
-    .profile-page-footer-container{
-        padding: 0 25px;
-    }
-    .nav-tabs-container{
-        margin-left: 28px;
-    }
-    
-}
-
 
 @media (min-width:1240px){
 
-    .summary-actions{
+    .profile-page-footer-container .summary-actions{
         margin-right: -52px;
         margin-bottom: 14px;
     }
@@ -665,28 +645,40 @@ body{
         margin-left: -18px;
         min-height: 185px;
     }
-
-    .profile-summary-image{
+    .profile-page-footer-container .profile-summary-image{
         margin-left: 28px;
     }
-
-    .profile-banner{
+    .profile-banner-container .profile-banner{
         max-height: 350px;
     }
-    .profile-summary{
+    .profile-page-footer-container .profile-summary{
         margin-top: -30px;
     }
-    
     .post-container-footer{
         padding-left: 55px;
         padding-right: 54px;
     }
-
-
     .topbar-nav-icons{
         width: 115px;
     }
-    
+
+    @media (min-width:1440) and (max-width:1800) {
+        .summary-detail-container{
+            padding-left: 0px !important;
+        }
+        .profile-banner-container{
+            margin-left: 5% !important;
+            margin-right: 5% !important;
+        }
+        .profile-page-footer-container{
+            padding: 0 25px;
+        }
+        .nav-tabs-container{
+            margin-left: 28px;
+        }
+
+    }
+   
 }
 
 
@@ -705,11 +697,5 @@ body{
     }
     .profile-banner{
         max-height: 460px;
-    }
-}
-
-@media (min-width:2100px){
-    .topbar .topbar-nav{
-        padding-left: 9%;
     }
 }

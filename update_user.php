@@ -1,5 +1,7 @@
 <?php
 session_start();
+
+//getting the database connection   
 require_once "db_connection.php";
 
 header('Content-Type: application/json');

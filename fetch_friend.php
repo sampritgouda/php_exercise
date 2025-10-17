@@ -10,7 +10,7 @@ if (!isset($_SESSION['user_id'])) {
 
 $user_id = isset($_GET['user_id']) ? intval($_GET['user_id']) : $_SESSION['user_id'] ?? null;
 
-
+//fetch friends from db
 $sql = "
     SELECT DISTINCT u.User_id, u.Name
     FROM tFriends f
