@@ -55,7 +55,7 @@ if ($phone !== null && !preg_match('/^[0-9]{10}$/', $phone)) {
 
 // Check email duplicate only if email field is sent
 if ($email !== null) {
-    $checkStmt = $conn->prepare("SELECT 1 FROM tUser WHERE Email_id = ? AND User_id != ?");
+    $checkStmt = $conn->prepare("SELECT 1 FROM t_user WHERE email_id = ? AND user_id != ?");
     $checkStmt->bind_param("si", $email, $user_id);
     $checkStmt->execute();
     $result = $checkStmt->get_result();

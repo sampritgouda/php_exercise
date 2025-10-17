@@ -7,7 +7,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $password = $_POST['password'];
 
     // Fetch the user record by email
-    $stmt = $conn->prepare("SELECT * FROM tUser WHERE Email_id = ?");
+    $stmt = $conn->prepare("SELECT * FROM t_user WHERE email_id = ?");
     $stmt->bind_param("s", $email);
     $stmt->execute();
     $result = $stmt->get_result();

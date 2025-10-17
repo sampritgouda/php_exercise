@@ -12,9 +12,9 @@ if(!isset($_SESSION['user_id'])){
 $user_id = isset($_GET['user_id']) ? intval($_GET['user_id']) : $_SESSION['user_id'] ?? null;
 
 // Fetch posts for this user only
-$sql = "SELECT tw.post, tw.posting_date, tu.Name
-        FROM tWall tw
-        JOIN tUser tu ON tw.user_id = tu.User_id
+$sql = "SELECT tw.post, tw.posting_date, tu.name
+        FROM t_wall tw
+        JOIN t_user tu ON tw.user_id = tu.user_id
         WHERE tw.user_id = ?
         ORDER BY tw.posting_date DESC";
 

@@ -10,7 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
     // Check if email already exists
-    $checkStmt = $conn->prepare("SELECT * FROM tUser WHERE Email_id = ?");
+    $checkStmt = $conn->prepare("SELECT * FROM t_user WHERE email_id = ?");
     $checkStmt->bind_param("s", $email);
     $checkStmt->execute();
     $result = $checkStmt->get_result();
@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     } 
     else{
             // Insert new user
-            $stmt = $conn->prepare("INSERT INTO tUser (Name, Email_id, Password, Address, Phone) VALUES (?, ?, ? ,? , ?)");
+            $stmt = $conn->prepare("INSERT INTO t_user (name, email_id, password, address, phone) VALUES (?, ?, ? ,? , ?)");
             $stmt->bind_param("sssss", $username, $email, $password ,$address, $mobile_number);
             
             if ($stmt->execute()) {

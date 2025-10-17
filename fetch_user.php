@@ -13,7 +13,7 @@ if (!isset($_SESSION['user_id'])) {
 
 $user_id = $_SESSION['user_id'];
 //getting user details
-$sql = "SELECT Name, Email_id, Address, Phone FROM tUser WHERE User_id = ?";
+$sql = "SELECT name, email_id, address, phone FROM t_user WHERE user_id = ?";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("i", $user_id);
 $stmt->execute();

@@ -19,7 +19,7 @@ $user_id = $_SESSION['user_id'];
 if(isset($_POST['post_content']) && !empty(trim($_POST['post_content']))) {
     $post_content = $conn->real_escape_string($_POST['post_content']);
     // Insert post into database
-    $sql = "INSERT INTO tWall (user_id, post) VALUES ('$user_id', '$post_content')";
+    $sql = "INSERT INTO t_wall (user_id, post) VALUES ('$user_id', '$post_content')";
     // Execute query and check for success
     if($conn->query($sql) === TRUE) {
         echo json_encode([

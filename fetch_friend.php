@@ -12,10 +12,10 @@ $user_id = isset($_GET['user_id']) ? intval($_GET['user_id']) : $_SESSION['user_
 
 //fetch friends from db
 $sql = "
-    SELECT DISTINCT u.User_id, u.Name
-    FROM tFriends f
-    JOIN tUser u 
-        ON u.User_id = CASE 
+    SELECT DISTINCT u.user_id, u.name
+    FROM t_friends f
+    JOIN t_user u 
+        ON u.user_id = CASE 
             WHEN f.user_id = ? THEN f.friend_id
             WHEN f.friend_id = ? THEN f.user_id
         END

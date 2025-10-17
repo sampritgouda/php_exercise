@@ -3,7 +3,7 @@
 $host = "localhost";
 $user = "root";
 $pass = "root";
-$db   = "sql_exercise";
+$db   = "facebook_db";
 
 $conn = new mysqli($host, $user, $pass, $db);
 
